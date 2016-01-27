@@ -32,21 +32,21 @@ object Traversal extends App {
   println()
   iterativePreOrder(root)
   println()
-  iterativePreOrder2(root)
+  iterativePreOrder(root)
   println()
   println("---------")
   recursiveInOrder(root)
   println()
   iterativeInOrder(root)
   println()
-  iterativeInOrder2(root)
+  iterativeInOrder(root)
   println()
   println("---------")
   recursivePostOrder(root)
   println()
   iterativePostOrder(root)
   println()
-  iterativePostOrder2(root)
+  iterativePostOrder(root)
   println()
   println("---------")
   bfs(root)
@@ -115,7 +115,6 @@ object Traversal extends App {
   def iterativePostOrder(root: Node): Unit = {
     val stack = new mutable.Stack[Node]()
     var node = root
-
     var prev: Node = null
     while (stack.nonEmpty || node != null) {
       if (node != null) {
@@ -135,65 +134,9 @@ object Traversal extends App {
         }
       }
     }
-
-
   }
 
-  def iterativePreOrder2(root: Node): Unit = {
-    val stack = new mutable.Stack[Node]()
-    var node = root
-    while (stack.nonEmpty || node != null) {
-      if (node != null) {
-        print(node.value + " ")
-        if (node.right != null) stack.push(node.right)
-        node = node.left
-      }
-      else {
-        node = stack.pop()
-      }
-    }
-  }
 
-  def iterativeInOrder2(root: Node): Unit = {
-    val stack = new mutable.Stack[Node]()
-    var node = root
-    while (stack.nonEmpty || node != null) {
-      if (node != null) {
-        stack.push(node)
-        node = node.left
-      }
-      else {
-        node = stack.pop()
-        print(node.value + " ")
-        node = node.right
-      }
-    }
-  }
-
-  def iterativePostOrder2(root: Node): Unit = {
-    val stack = new mutable.Stack[Node]()
-    var node = root
-    var lastVisited: Node = null
-    while (stack.nonEmpty || node != null) {
-      if (node != null) {
-        stack.push(node)
-        node = node.left
-      }
-      else {
-        node = stack.pop()
-        if (node.right != null && lastVisited != node.right) {
-          stack.push(node)
-          node = node.right
-        }
-        else {
-          print(node.value + " ")
-          lastVisited = node
-          node = null
-
-        }
-      }
-    }
-  }
 
   def bfs(root: Node): Unit = {
     val q = new mutable.Queue[Node]()
@@ -207,6 +150,7 @@ object Traversal extends App {
       if (node.right != null) q.enqueue(node.right)
     }
   }
+
 
   def height(root: Node): Int = {
     val q = new mutable.Queue[(Node, Int)]()
@@ -229,6 +173,5 @@ object Traversal extends App {
     }
     max
   }
-
 
 }
